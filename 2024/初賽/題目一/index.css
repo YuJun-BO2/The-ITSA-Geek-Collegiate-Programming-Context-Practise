@@ -42,13 +42,18 @@ body {
     line-height: 1;
 }
 
-/* .informationbox{
-    height:auto;
-    margin:20px 0;
-} */
+.informationbox {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.button-container {
+    width: 900px;
+    margin: 0 auto;
+}
 
 .maincontent {
-    padding: 20px 20%;
+    padding: 20px 0;
     background-color: #c0c0c0;
     margin: 0;
     display: box;
@@ -59,26 +64,97 @@ body {
     position: relative;
 }
 
+.container2 {
+    overflow: auto;
+    width: 900px;
+    margin: 200px auto;
+}
+
+.container3 {
+    overflow: auto;
+    width: 900px;
+    height: auto;
+    margin: 80px auto;
+    position: relative;
+    bottom: 230px;
+}
+
+#paragraph1 {
+    float: right;
+    width: 400px;
+    height: auto;
+    background-color: #c0c0c0;
+    vertical-align: middle;
+    padding: 40px 40px 40px 100px;
+    line-height: 28px;
+    position: relative;
+    bottom: 250px;
+    z-index: 1; 
+}
+
+#paragraph2 {
+    float: left;
+    width: 400px;
+    height: auto;
+    background-color: #c0c0c0;
+    vertical-align: middle;
+    padding: 40px 100px 40px 40px;
+    line-height: 28px;
+    z-index: 1; 
+}
+
+#paragraphtitle1 {
+    font-size: 1.6em;
+    font-weight: bold;
+    padding-left: 420px;
+    width: auto;
+    margin: 0px 10px;
+} 
+
+#paragraphtitle2 {
+    font-size: 1.6em;
+    font-weight: bold;
+    width: auto;
+    margin: 0px 10px 20px 0;
+} 
+
+#img2 {
+    position: relative;
+    z-index: 2;
+    float: left;
+}
+
+#img3 {
+    position: relative;
+    z-index: 2;
+    float: right;
+    bottom: 390px;
+}
+
 .img {
-    width: 480px;
-    height: 360px;
+    width: 400px;
+    height: 300px;
     background-color: #a0a0a0;
     margin: 0px;
 }
 
 #img1 {
     float: right;
+    margin-left: 20px;
 }
 
+
+
 .information {
-    padding: 20px 0px;
+    padding-right: 20px;
 }
 
 #signbutt {
-    margin: 0 20%; 
+    margin-left: auto;
+    margin-right: auto;
     position: absolute;
     bottom: 0px;
-    border : none;
+    border: none;
     background-color: #333333;
     height: auto;
     width: auto;
@@ -114,6 +190,8 @@ body {
     }
 
     #signbutt {
-    margin: 0;
+        margin: 0;
+    }
 }
-}
+/* 
+container2下面留有許多的空白，我不知道怎麼處理 */
