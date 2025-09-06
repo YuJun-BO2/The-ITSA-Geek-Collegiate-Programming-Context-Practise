@@ -57,12 +57,37 @@
                 }
                 else if ($('input[name="id"]').val() !== "") {
                     const id = $('input[name="id"]').val();
-                    const book = books.find(b => b.id === id);
-                    if (book) {
-                        $('input[name="title"]').val(book.title);
-                        $('input[name="author"]').val(book.author);
-                        $('input[name="year"]').val(book.year);
-                    }
+                    const idx = books.findIndex(b => b.id == id);
+
+                    const book = {
+                        id: $('input[name="id"]').val(),
+                        title: $('input[name="title"]').val(),
+                        author: $('input[name="author"]').val(),
+                        year: $('input[name="year"]').val()
+                    };
+
+                    books[idx] = book;
+
+                    // 清空輸入欄位
+                    $('input[name="id"]').val("");
+                    $('input[name="title"]').val("");
+                    $('input[name="author"]').val("");
+                    $('input[name="year"]').val("");
+
+                    sortBooks();
+                    displayBooks();
+                }
+            });
+
+            // 點擊更新按鈕
+            $(document).on('click', '.update-btn', function () {
+                const id = String($(this).data('id'));
+                const book = books.find(b => b.id === id);
+                if (book) {
+                    $('input[name="id"]').val(book.id);
+                    $('input[name="title"]').val(book.title);
+                    $('input[name="author"]').val(book.author);
+                    $('input[name="year"]').val(book.year);
                 }
             });
 
@@ -108,6 +133,7 @@
         出版年份: <br><input type="text" name="year"><br>
         <br><input type="submit" value="添加圖書">
     </form>
+    <h2>圖書列表</h2>
     <table border="1">
         <thead>
             <tr>
