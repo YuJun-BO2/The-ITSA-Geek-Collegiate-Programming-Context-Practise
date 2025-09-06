@@ -6,11 +6,48 @@
     <link rel="stylesheet" href="index.css">
     <script src="jquery-3.7.1.min.js"></script>
     <script>
-        if (window.jQuery) {
-            console.log('jQuery 已載入成功！');
-        } else {
-            console.log('jQuery 載入失敗！');
-        }
+        $(document).ready(function () {
+            if (window.jQuery) {
+                console.log('jQuery 已載入成功！');
+            } else {
+                console.log('jQuery 載入失敗！');
+            }
+
+            let books = []; // 儲存書籍
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                if ($('input[name="id"]').val() === "") {
+                    $('input[name="id"]').val(books.length + 1);
+
+                    const book = {
+                        id: $('input[name="id"]').val(),
+                        title: $('input[name="title"]').val(),
+                        author: $('input[name="author"]').val(),
+                        year: $('input[name="year"]').val()
+                    };
+
+                    // 清空輸入欄位
+                    $('input[name="id"]').val("");
+                    $('input[name="title"]').val("");
+                    $('input[name="author"]').val("");
+                    $('input[name="year"]').val("");
+
+                    books.push(book); // 加入陣列
+                    console.log(books); // 檢查結果
+                    // 你可以在這裡更新表格顯示
+                }
+                else if ($('input[name="id"]').val() !== "") {
+                    const id = $('input[name="id"]').val();
+                    const book = books.find(b => b.id === id);
+                    if (book) {
+                        $('input[name="title"]').val(book.title);
+                        $('input[name="author"]').val(book.author);
+                        $('input[name="year"]').val(book.year);
+                    }
+                }
+            });
+        });
     </script>
 </head>
 
@@ -18,7 +55,7 @@
     <h1>圖書管理系統</h1>
     <h2>添加圖書</h2>
     <form>
-        <input type="hidden" name="id" placeholder="ID">
+        <input type="hidden" name="id" value="">
         書名: <br><input type="text" name="title"><br>
         作者: <br><input type="text" name="author"><br>
         出版年份: <br><input type="text" name="year"><br>
@@ -30,8 +67,8 @@
             <th>書名</th>
             <th>作者</th>
             <th>出版年份</th>
-            <th>操作</th>
-            <th></th>
+            <th>刪除</th>
+            <th>更新</th>
         </tr>
         <tr>
             <td>1</td>
