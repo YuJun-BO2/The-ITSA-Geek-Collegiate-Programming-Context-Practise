@@ -15,10 +15,26 @@
 
             let books = []; // 儲存書籍
 
+            // 找出下一個可用的 ID
+            function findnextId() {
+                let nextId = 1;
+                if (books.length > 0) {
+                    for (let i = 0; i < books.length; i++) {
+                        if (nextId == books[i].id) {
+                            nextId++;
+                        } else {
+                            return nextId;
+                        }
+                    }
+                }
+                return nextId;
+            }
+
+            // 添加或更新書籍
             $('form').on('submit', function (e) {
                 e.preventDefault();
                 if ($('input[name="id"]').val() === "") {
-                    $('input[name="id"]').val(books.length + 1);
+                    $('input[name="id"]').val(findnextId());
 
                     const book = {
                         id: $('input[name="id"]').val(),
@@ -35,7 +51,9 @@
 
                     books.push(book); // 加入陣列
                     console.log(books); // 檢查結果
-                    // 你可以在這裡更新表格顯示
+                    
+                    sortBooks();
+                    displayBooks();
                 }
                 else if ($('input[name="id"]').val() !== "") {
                     const id = $('input[name="id"]').val();
@@ -47,6 +65,35 @@
                     }
                 }
             });
+
+            // 更新Book list
+            function displayBooks() {
+                const tableBody = $('table tbody');
+                tableBody.empty(); // 清空現有的表格內容
+                books.forEach(book => {
+                    const row = `<tr>
+                        <td>${book.id}</td>
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.year}</td>
+                        <td><button class="delete-btn" data-id="${book.id}">刪除</button></td>
+                        <td><button class="update-btn" data-id="${book.id}">更新</button></td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+            };
+
+            // 刪除書籍
+            $(document).on('click', '.delete-btn', function () {
+                const id = String($(this).data('id'));
+                books = books.filter(b => b.id !== id); // 移除指定 ID 的書籍
+                displayBooks(); // 更新顯示
+            });
+
+            // Sort books by id
+            function sortBooks() {
+                books.sort((a, b) => a.id - b.id);
+            }
         });
     </script>
 </head>
@@ -62,18 +109,18 @@
         <br><input type="submit" value="添加圖書">
     </form>
     <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>書名</th>
-            <th>作者</th>
-            <th>出版年份</th>
-            <th>刪除</th>
-            <th>更新</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>程式設計入門</td>
-            <td>張三</td>
-            <td>2020</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>書名</th>
+                <th>作者</th>
+                <th>出版年份</th>
+                <th>刪除</th>
+                <th>更新</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </body>
