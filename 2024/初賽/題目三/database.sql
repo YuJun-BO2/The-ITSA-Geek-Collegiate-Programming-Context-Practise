@@ -1,6 +1,7 @@
 CREATE DATABASE MEDICAL_DB;
-
 USE MEDICAL_DB;
+
+CREATE USER 'loginer'@'localhost' IDENTIFIED BY '0pjO6N11CVFl';
 
 CREATE TABLE
     Accounts (
@@ -10,6 +11,8 @@ CREATE TABLE
         passwordHash CHAR(64),
         defaultPassword BOOLEAN DEFAULT TRUE
     );
+
+GRANT SELECT ON MEDICAL_DB.Accounts TO 'loginer'@'localhost';
 
 CREATE TABLE
     Items (
@@ -38,9 +41,9 @@ CREATE TABLE
     );
 
 INSERT INTO
-    Accounts (isStaff, userName, passwordHash, defaultPassword)
-VALUES (TRUE, 'admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', FALSE);
+    Accounts (isStaff, userName, passwordHash)
+VALUES (TRUE, 'admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8');
 
--- 預設帳號密碼
+-- 預設前端帳號密碼
 -- 帳號:admin
 -- 密碼:password
